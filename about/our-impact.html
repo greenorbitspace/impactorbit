@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import HeroSection from "../../components/HeroSection.astro";
+
+import ImpactDashboard from "../../components/Impact/ImpactDashboard.astro";
+
+import questionsData from "../../data/impact/questions.json";
+import yearly2025 from "../../data/impact/yearly_2025.json";
+
+const yearlyDataArray = [yearly2025];
+---
+
+<Layout 
+  title="Our Impact | Green Orbit Digital"
+  description="Green Orbit Digital’s impact reporting across governance, workers, community, environment, and customers, with multi-year trends and measurable outcomes."
+>
+  <Header />
+
+  <main class="py-8">
+
+    <!-- Hero -->
+    <HeroSection
+      title="Our Impact"
+      description="We measure and report the positive impact of our work across governance, workers, community, environment, and customers—tracking year-on-year progress."
+    />
+
+    <!-- Yearly Breakdown Sections -->
+    {yearlyDataArray.map((yearlyData) => (
+      <section class="py-16" id={`year-${yearlyData.year}`} key={yearlyData.year}>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-gray-700 dark:text-white">
+          <h2 class="text-3xl font-bold mb-4">Year {yearlyData.year} – Detailed Scores</h2>
+          <ImpactDashboard questionsData={questionsData} yearlyData={yearlyData} />
+        </div>
+      </section>
+    ))}
+
+  </main>
+
+  <!-- Closing Section -->
+  <section class="w-full bg-secondary-500 py-16 text-white text-center">
+    <h2 class="text-3xl font-bold mb-4">Driving Transparent, Measurable Impact</h2>
+    <p class="text-gray-200 mb-8 max-w-3xl mx-auto">
+      Through structured measurement and reporting, we help organisations track progress, demonstrate accountability, 
+      and continuously improve their social, environmental, and governance impact.
+    </p>
+    <a 
+      href="/contact"
+      class="inline-block px-8 py-4 bg-accent-500 hover:bg-accent-600 text-white text-lg font-semibold rounded-lg transition"
+    >
+      Start a Conversation
+    </a>
+  </section>
+
+  <Footer />
+</Layout>
